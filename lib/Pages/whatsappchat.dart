@@ -15,37 +15,30 @@ class _ChatPageState extends State<ChatPage> {
         name: "Ankush Das",
         icon: Icon(Icons.person),
         isGrp: false,
-        message: "Hi i am Ankush",
-        time: "18:09",
-        lastSeen: "last seen at today 12:05"),
-    ChatModel(
-        name: "Dev Room",
-        icon: Icon(Icons.person),
-        isGrp: true,
         message: "Hi i am Joy",
         time: "18:09",
-        lastSeen: "last seen at today 12:05"),
+        lastSeen: "Today at 10:00"),
     ChatModel(
         name: "Aritra Das",
         icon: Icon(Icons.person),
         isGrp: false,
         message: "Hi i am Aritra",
         time: "18:09",
-        lastSeen: "last seen at today 12:05"),
+        lastSeen: "Today at 10:00"),
     ChatModel(
         name: "Amrtua Das",
         icon: Icon(Icons.person),
         isGrp: false,
         message: "Hi i am Amrtya",
         time: "18:09",
-        lastSeen: "last seen at today 12:05"),
+        lastSeen: "Today at 10:00"),
     ChatModel(
         name: "joy Das",
         icon: Icon(Icons.person),
         isGrp: false,
         message: "Hi i am Joy",
         time: "18:09",
-        lastSeen: "last seen at today 12:05"),
+        lastSeen: "Today at 10:00"),
   ];
 
   @override
