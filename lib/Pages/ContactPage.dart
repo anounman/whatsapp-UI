@@ -18,9 +18,9 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
   List<ContactModel> contacts = [
     ContactModel(name: "Ankuh Das", about: "Devloper"),
-    ContactModel(name: "Ankuh Das", about: "Devloper"),
-    ContactModel(name: "Ankuh Das", about: "Devloper"),
-    ContactModel(name: "Ankuh Das", about: "Devloper"),
+    ContactModel(name: "Joy Das", about: "Devloper Web"),
+    ContactModel(name: "Aritra Das", about: "web Devloper"),
+    ContactModel(name: "Amrtya Sankar Das", about: "App Devloper"),
   ];
 
   @override
