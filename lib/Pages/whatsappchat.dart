@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/Pages/ContactPage.dart';
 import 'package:whatsapp/UI/chatcard.dart';
 import 'package:whatsapp/model/chatmodel.dart';
 
@@ -47,7 +48,10 @@ class _ChatPageState extends State<ChatPage> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(20.0),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => ContactPage()));
+            },
             child: Icon(Icons.chat),
           ),
         ),

@@ -25,11 +25,32 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Color(0xFF075E54),
         actions: [
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
-          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))
+          PopupMenuButton<String>(
+              onSelected: (value) {},
+              itemBuilder: (BuildContext context) {
+                return [
+                  const PopupMenuItem(
+                    child: Text("New Group"),
+                    value: "New Group",
+                  ),
+                  const PopupMenuItem(
+                    child: Text("New bordcast"),
+                    value: "New bordcast",
+                  ),
+                  const PopupMenuItem(
+                    child: Text("Linked device"),
+                    value: "Linked Deviced",
+                  ),
+                  const PopupMenuItem(
+                    child: Text("Setting"),
+                    value: "Setting",
+                  ),
+                ];
+              })
         ],
         bottom: TabBar(
           controller: _controller,
-          tabs: [
+          tabs: const [
             Tab(icon: Icon(Icons.camera_alt)),
             Tab(
               text: "CHAT",
@@ -45,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: TabBarView(
         controller: _controller,
-        children: [
+        children: const [
           Text("HI"),
           ChatPage(),
           Text("bye"),
