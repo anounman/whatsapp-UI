@@ -17,3 +17,10 @@ class ChatModel {
     required this.lastSeen,
   });
 }
+
+class ContactModel {
+  late String name;
+  late String about;
+
+  ContactModel({required this.name, required this.about});
+}

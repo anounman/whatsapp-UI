@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen>
               text: "STATUS",
             ),
             Tab(
-              text: "CA",
+              text: "CALLS",
             )
           ],
         ),

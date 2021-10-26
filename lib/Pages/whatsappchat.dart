@@ -50,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
           child: FloatingActionButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (builder) => ContactPage()));
+                  MaterialPageRoute(builder: (builder) => ContactPage()));  
             },
             child: Icon(Icons.chat),
           ),

@@ -136,6 +136,8 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
                                 focusNode: focusNode,
                                 textAlignVertical: TextAlignVertical.center,
                                 keyboardType: TextInputType.multiline,
+                                maxLines: 10,
+                                minLines: 1,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintStyle: TextStyle(color: Colors.grey),

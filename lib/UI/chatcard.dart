@@ -33,12 +33,12 @@ class Chatcard extends StatelessWidget {
             title: chat.name.text.bold.size(16).make(),
             subtitle: Row(
               children: [
-                Icon(Icons.done_all).pOnly(right: 10),
+                const Icon(Icons.done_all).pOnly(right: 10),
                 chat.message.text.size(13).make()
               ],
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 1,
           ).pOnly(right: 20, left: 20)
         ],
