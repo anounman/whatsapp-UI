@@ -8,23 +8,34 @@ class ContactCard extends StatelessWidget {
   final ContactModel contactCard;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Column(
-        children: [
-          ListTile(
-              leading: CircleAvatar(
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
+    return Stack(
+      children: [
+        Column(
+          children: [
+            ListTile(
+                leading: CircleAvatar(
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                  backgroundColor: Vx.blueGray300,
+                  radius: 25,
                 ),
-                backgroundColor: Vx.blueGray300,
-                radius: 25,
-              ),
-              title: contactCard.name.text.bold.size(16).make(),
-              subtitle: contactCard.about.text.size(13).make()),
-        ],
-      ),
+                title: contactCard.name.text.bold.size(16).make(),
+                subtitle: contactCard.about.text.size(13).make()),
+          ],
+        ),
+        contactCard.isSelected?CircleAvatar(
+          backgroundColor: Colors.teal,
+          radius: 11,
+          child: Icon(
+            Icons.check,
+            color: Colors.white,
+            size: 16,
+          ),
+        ).pOnly(top: 40, left: 45)
+        : Container()
+      ],
     );
   }
 }

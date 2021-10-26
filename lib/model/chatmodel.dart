@@ -21,6 +21,7 @@ class ChatModel {
 class ContactModel {
   late String name;
   late String about;
-
-  ContactModel({required this.name, required this.about});
+  bool isSelected = false;
+  ContactModel(
+      {required this.name, required this.about, this.isSelected = false});
 }

@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:whatsapp/Pages/CreateGroup.dart';
 import 'package:whatsapp/UI/ContactCard.dart';
 import 'package:whatsapp/UI/CustomButton.dart';
 import 'package:whatsapp/model/chatmodel.dart';
@@ -31,47 +32,28 @@ class _ContactPageState extends State<ContactPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              "Select Contact".text.size(19).bold.make(),
+              "Create Group".text.size(19).bold.make(),
               "300 Contacts".text.size(13).make(),
             ],
           ),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 26)),
-            PopupMenuButton<String>(
-                onSelected: (value) {},
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem(
-                      child: Text("Invites a friend"),
-                      value: "invite",
-                    ),
-                    PopupMenuItem(
-                      child: Text("Contatcs"),
-                      value: "Contact",
-                    ),
-                    PopupMenuItem(
-                      child: Text("Refresh"),
-                      value: "Refresh",
-                    ),
-                    PopupMenuItem(
-                      child: Text("Help"),
-                      value: "help",
-                    ),
-                  ];
-                })
           ],
         ),
         body: ListView.builder(
-            itemCount: contacts.length,
+            itemCount: contacts.length + 2,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return ButtonCard(name: "Create Group", icon: Icons.group);
+                return InkWell(
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => CreateGroup())),
+                    child: ButtonCard(name: "Create Group", icon: Icons.group));
               }
               if (index == 1) {
                 return ButtonCard(name: "New Contact", icon: Icons.person_add);
               }
               return ContactCard(
-                contactCard: contacts[index],
+                contactCard: contacts[index - 2],
               );
             }));
   }
