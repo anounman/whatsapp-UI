@@ -1,16 +1,20 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:whatsapp/Pages/CameraPage/Camera.dart';
 import 'package:whatsapp/Pages/whatsappchat.dart';
+import 'package:whatsapp/model/chatmodel.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
-
+  HomeScreen({Key key, this.chatmodel, this.sourceChat}) : super(key: key);
+  final List<ChatModel> chatmodel;
+  final ChatModel sourceChat;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _controller;
+  TabController _controller;
   @override
   void initState() {
     super.initState();
@@ -66,9 +70,11 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: TabBarView(
         controller: _controller,
-        children: const [
-          Text("HI"),
-          ChatPage(),
+        children: [
+          Camera(),
+          ChatPage(
+            sourcechat: widget.sourceChat,
+          ),
           Text("bye"),
           Text("tata"),
         ],

@@ -7,6 +7,7 @@ class ChatModel {
   late String time;
   late String message;
   late String lastSeen;
+  int id;
 
   ChatModel({
     required this.name,
@@ -15,6 +16,7 @@ class ChatModel {
     required this.message,
     required this.time,
     required this.lastSeen,
+    required this.id,
   });
 }
 

@@ -2,6 +2,7 @@
     package="com.example.whatsapp">
    <application
         android:label="whatsapp"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

@@ -1,26 +1,35 @@
-// ignore: file_names
 // ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:whatsapp/UI/OwnReplyCard.dart';
+import 'package:whatsapp/UI/ReplyCard.dart';
 import 'package:whatsapp/model/chatmodel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualChatPage extends StatefulWidget {
-  const IndividualChatPage({Key? key, required this.chat}) : super(key: key);
+  const IndividualChatPage(
+      {Key? key, required this.chat, required this.sourcechat})
+      : super(key: key);
   final ChatModel chat;
+  final ChatModel sourcechat;
+
   @override
   _IndividualChatPageState createState() => _IndividualChatPageState();
 }
 
 class _IndividualChatPageState extends State<IndividualChatPage> {
   bool show = false;
+  bool isSend = false;
   late TextEditingController _textEditingController;
   FocusNode focusNode = FocusNode();
+  late IO.Socket socket;
   @override
   void initState() {
     super.initState();
+    connectToServer();
     _textEditingController = TextEditingController();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
@@ -31,10 +40,34 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
     });
   }
 
+  void disPose() {
+    super.dispose();
+    socket.disconnect();
+  }
+
+  void connectToServer() {
+    socket = IO.io('http://192.168.29.115:5000', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': false,
+    });
+    socket.connect();
+    socket.emit("signin", widget.sourcechat.id);
+    socket.onConnect((data) {
+      print('connected');
+      socket.on("message", (data) => print(data));
+    });
+    print(socket.connected);
+  }
+
+  void sendMessage(String message, int sourceId, int targetId) {
+    socket.emit("SendMessage",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Color(0xFF075E54),
         leadingWidth: 80,
@@ -118,7 +151,36 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
             return Future.value(false);
           },
           child: Stack(children: [
-            ListView(),
+            Image.asset(
+              "assets/images/chat_bg.png",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height - 140,
+              child: ListView(
+                shrinkWrap: true,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  OwnReplyCard(),
+                  OwnReplyCard(),
+                  ReplyCard(),
+                  OwnReplyCard(),
+                  OwnReplyCard(),
+                  ReplyCard(),
+                  OwnReplyCard(),
+                  OwnReplyCard(),
+                  ReplyCard(),
+                  OwnReplyCard(),
+                  OwnReplyCard(),
+                  ReplyCard(),
+                  OwnReplyCard(),
+                  OwnReplyCard(),
+                  ReplyCard(),
+                ],
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Column(
@@ -132,6 +194,9 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
                               child: TextFormField(
+                                onChanged: (e) => setState(() {
+                                  isSend = true;
+                                }),
                                 controller: _textEditingController,
                                 focusNode: focusNode,
                                 textAlignVertical: TextAlignVertical.center,
@@ -178,10 +243,13 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
                         radius: 25,
                         child: IconButton(
                           icon: Icon(
-                            Icons.mic,
+                            isSend ? Icons.send : Icons.mic,
                             color: Colors.white,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            sendMessage(_textEditingController.text,
+                                widget.sourcechat.id, widget.chat.id);
+                          },
                         ),
                       ).pOnly(bottom: 2)
                     ],

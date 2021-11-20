@@ -1,10 +1,18 @@
 // @dart=2.9
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp/Pages/LandingScreen.dart';
+import 'package:whatsapp/Pages/CameraPage/Camera.dart';
+import 'package:whatsapp/Pages/LoginPage.dart';
 import 'package:whatsapp/Screens/home.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    // print(e);
+  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,9 +25,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: "OpenSans",
-          primaryColor: Color(0xFF075E54),
-          accentColor: Color(0xFF128C7E)),
-      home: LandingPage(),
+          primaryColor: const Color(0xFF075E54),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: const Color(0xFF128C7E))),
+      home: LoginScreen(),
     );
   }
 }

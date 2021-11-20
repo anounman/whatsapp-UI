@@ -1,88 +1,73 @@
 // ignore_for_file: prefer_const_constructors, file_names
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:whatsapp/Screens/home.dart';
+import 'package:whatsapp/UI/CustomButton.dart';
+import 'package:whatsapp/model/chatmodel.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  // final List<String> _code = ['+91', '+0', '+1'];
+class _LoginScreenState extends State<LoginScreen> {
+  late ChatModel sourceChat;
+  List<ChatModel> chatmodels = [
+    ChatModel(
+        name: "Dev Stack",
+        message: "Hello",
+        time: "12:00",
+        id: 1,
+        isGrp: false,
+        icon: Icon(Icons.person),
+        lastSeen: ''),
+    ChatModel(
+        name: "Dev Stack",
+        message: "Hello",
+        time: "12:00",
+        id: 2,
+        isGrp: false,
+        icon: Icon(Icons.person),
+        lastSeen: ''),
+    ChatModel(
+        name: "Dev Stack",
+        message: "Hello",
+        time: "12:00",
+        id: 3,
+        isGrp: false,
+        icon: Icon(Icons.person),
+        lastSeen: ''),
+    ChatModel(
+        name: "Dev Stack",
+        message: "Hello",
+        time: "12:00",
+        id: 4,
+        isGrp: false,
+        icon: Icon(Icons.person),
+        lastSeen: ''),
+  ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Scaffold(
-          body: SafeArea(
-              child: Column(
-        children: [
-          "Enter your phone number"
-              .text
-              .teal700
-              .bold
-              .size(19)
-              .makeCentered()
-              .pOnly(top: 20, bottom: 20),
-          "WhatsApp will send an SMS message to verify your".text.make(),
-          RichText(
-              text: TextSpan(
-                  text: "phone number.",
-                  style: TextStyle(color: Colors.black),
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: <TextSpan>[
-                TextSpan(
-                    text: "What's my number ?",
-                    style: TextStyle(color: Colors.blue))
-              ])).pOnly(bottom: 20),
-          "India".text.bold.make(),
-          Divider(
-            height: 20,
-            thickness: 2,
-            color: Colors.teal[700],
-          ).pOnly(left: 40, right: 40),
-          // Row(
-          //   children: [
-          //     // DropdownButton(
-          //     //   hint: Text(
-          //     //       'Please choose a location'), // Not necessary for Option 1
-          //     //   onChanged: (newValue) {},
-          //     //   items: _code.map((location) {
-          //     //     return DropdownMenuItem(
-          //     //       child: Text(location),
-          //     //       value: location,
-          //     //     );
-          //     //   }).toList(),
-          //     // ),
-          //     TextFormField(
-          //       textAlignVertical: TextAlignVertical.center,
-          //       decoration: InputDecoration(
-          //         border: InputBorder.none,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // // Divider(
-          //   height: 20,
-          //   thickness: 2,
-          //   color: Colors.teal[700],
-          // ).pOnly(left: 40, right: 40),
-          "Carrier SMS charge may apply"
-              .text
-              .make()
-              .pOnly(bottom: MediaQuery.of(context).size.height / 2),
-          Card(
-            elevation: 8,
-            child: Container(
-              color: Colors.green,
-              width: MediaQuery.of(context).size.width / 4,
-              height: 50,
-              child: Center(child: "NEXT".text.bold.make()),
-            ),
-          )
-        ],
-      ))),
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: chatmodels.length,
+          itemBuilder: (contex, index) => InkWell(
+                onTap: () {
+                  sourceChat = chatmodels.removeAt(index);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => HomeScreen(
+                                chatmodel: chatmodels,
+                                sourceChat: sourceChat,
+                              )));
+                },
+                child: ButtonCard(
+                  name: chatmodels[index].name,
+                  icon: Icons.person,
+                ),
+              )),
     );
   }
 }

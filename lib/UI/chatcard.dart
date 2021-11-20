@@ -4,8 +4,10 @@ import 'package:whatsapp/Screens/IndividualChatPage.dart';
 import 'package:whatsapp/model/chatmodel.dart';
 
 class Chatcard extends StatelessWidget {
-  const Chatcard({Key? key, required this.chat}) : super(key: key);
+  const Chatcard({Key? key, required this.chat, required this.sourcechat})
+      : super(key: key);
   final ChatModel chat;
+  final ChatModel sourcechat;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -15,6 +17,7 @@ class Chatcard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => IndividualChatPage(
                 chat: chat,
+                sourcechat: sourcechat,
               ),
             ));
       },
